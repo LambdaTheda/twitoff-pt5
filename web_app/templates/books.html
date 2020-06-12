@@ -8,9 +8,10 @@
 </head>
 
 <body>
+<!--    
     <h1> Hello World</h1>
 
-    <p> {{message}} </p>  <!--jinji template syntax: message is the var called in book_routes.py Useful eg if want to say "here soem books, Al, or Theda, ofr "X" for flx ... of coding -->
+    <p> {{message}} </p>  #jinji template syntax: message is the var called in book_routes.py Useful eg if want to say "here some books, Al, or Theda, for "X" for flx ... of coding 
 
 
     <ul>
@@ -19,6 +20,21 @@
         <li> Item 3 </li>
 
     </ul>
+-->
+    <h2> Welcome to the Books Page </h2>
+
+    <p> {{ message }} </p> <!-- INJECT OUR PYTHON VARIABLE "message" being passed to/in book_routes.py-->
+
+    {% if books %}  <!-- jinja (python- HTML hybRLid) templating lang THIS  IS JINJA SYNTAX FOR A PYTHONEXPRS'ION  -->
+        <ul>
+        {% for book in books %}
+            <li>{{ book["title"] }}</li> <!-- INJECT BK TITLE INTO OUR LIST ITEM-->
+        {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>Books not found.</p>
+    {% endif %} 
 
 </body>
 
