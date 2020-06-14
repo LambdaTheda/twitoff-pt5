@@ -1,0 +1,6 @@
+
+
+# ignore dev database stuff from version control:
+
+migrations
+*.db

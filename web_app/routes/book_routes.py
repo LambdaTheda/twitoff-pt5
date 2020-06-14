@@ -1,5 +1,7 @@
 from flask import Blueprint, jsonify, request, render_template #
 
+from web_app.models import db, Book, parse_records #web_app is folder; models file is ~cls? (jish)
+
 book_routes = Blueprint("book_routes", __name__)
 
 # RETURN JSON RESPONSES
@@ -17,7 +19,7 @@ def list_book():
 def list_books_for_humans():
     books = [
         {"id": 1, "title": "Book 1"},
-        {"id": 2, "title": "Book 2"},
+        {"id": 2, "title": "Book 2"},  
         {"id": 3, "title": "Book 3"},
     ]
     return render_template("books.html", message="Here's some bookS", books=books)  #render_template fcn looks for the templates folder and HTML file passed to it
@@ -31,8 +33,12 @@ def new_book():
 # CATCHING DATA WE SENT FRoM OUR NEW/BOOK FORM through the REQUEST obj line 34 atm, prov by Flask pkg. Invoke request.form inside our ROUTE ..it'll b a dict-like obj
 @book_routes.route("/books/create", methods=["POST"]) # this route will resp to a POST req, but not a GET req (by default).. methods=["GET", "POST"] if want both; OPTIONAL param
 def create_book():
-    print("FORM DATA:", dict(request.form)) # CATCHes DATA WE SENT FRoM OUR NEW/BOOK FORM; configs our rote to handle POST req f(rom pg's form?) & do smthg w/it 
-    # todo: store in database
+    print("FORM DATA:", dict(request.form) # CATCHes DATA WE SENT FRoM OUR NEW/BOOK FORM; configs our route to handle POST req (from pg's form?) & do smthg w/it 
+    
+    new_book = Book(title=request.form["title"], author_id=request.form["author_name"]) # initialize a new
+    db.session.add(new_book)
+    db.session.commit()           # db from our model class 
+
     return jsonify({
         "message": "BOOK CREATED OK (TODO)",
         "book": dict(request.form) # MUST IMPORT request from flask- so when our rte handles a req, we can capture the data (from the form) incl'd in th@ req
