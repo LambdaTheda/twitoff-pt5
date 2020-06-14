@@ -1,4 +1,5 @@
-# web_app/models.py
+# web_app/models.py  FORMATS OUR TABLE, THIS PG IS USED BY OUR BOOK ROUTES, NEW BOOKS ROUTES, ..imports stuff in this pg to help our ROUTES PGS AND OUR FLASK WEB APP RUN
+                    # WHOLE FILE PAGE IS A CLASS, IT'S THE CLASS DEF 
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -16,7 +17,7 @@ class Book(db.Model):
     def __repr__(self): #determines how that inst should be displayed when u print or ask what datatype it is
         return f"<Book {self.id} {self.title}>"
     
-def parse_records(database_records):
+def parse_records(database_records): #KEEPS APPENDING THE NEW BOOKS THAT WE ADD TO OUR INITIALLY EMPTY BOOKS LIST
     """
     A helper method for converting a list of database record objects into a list of dictionaries, so they can be returned as JSON
 
@@ -31,10 +32,10 @@ def parse_records(database_records):
             {"id": 3, "title": "Book 3"},
         ]
     """
-    parsed_records = []
+    parsed_records = [] # IS A list THAT IS INSIDE ALL DB RECS(ie ROWS)     In Python, what is difference between Array and List? | Edureka Community 
     for record in database_records:
         print(record)
-        parsed_record = record.__dict__
+        parsed_record = record.__dict__  # ?? https://www.tutorialspoint.com/What-does-built-in-class-attribute-dict-do-in-Python
         del parsed_record["_sa_instance_state"]
-        parsed_records.append(parsed_record)
+        parsed_records.append(parsed_record)   # APPENDs NEW books
     return parsed_records
