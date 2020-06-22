@@ -4,3 +4,7 @@
 
 migrations
 *.db
+
+# ignore secret credentials: it should be grayed out in file explorer side menu bar
+
+.env 

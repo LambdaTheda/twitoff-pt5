@@ -1,6 +1,4 @@
-<!-- Cls Nts Unit 3 Mod 1-->
-
-# twitoff-pt5 Cls Nts mod 1
+<!-- README_twitr_basilica.md unit 3 mod 2-->
 
 # Installation
 
@@ -13,10 +11,9 @@ cd twitoff-pt-5
 # Setup 
 
 ```sh
-pipenv install # ACTUALLY USED: from https://stackoverflow.com/questions/31512422/pip-install-failing-with-oserror-errno-13-permission-denied-on-directory
-               # virtualenv .env
-               # source .venv/bin/activate 
-               # pip install (SQLAlchemy & Flask-Migrate pkgs)
+FLASK_APP=web_app flask db init
+FLASK_APP=web_app flask db migrate
+FLASK_APP=web_app flask db upgrade
 ```
 # Usage
 
